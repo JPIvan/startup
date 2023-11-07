@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# List of scripts to execute
+scripts=(
+    "startup-git-repos.bash"
+    "startup-apps.bash"  # This takes over the terminal, so it should be last
+)
+
+# Get the directory of the current script file
+script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+echo "Script directory: $script_dir"
+echo "Found ${#scripts[@]} scripts to execute."
+
+# Loop through the scripts and execute each one
+for script in "${scripts[@]}"
+do
+    # Execute the script with the script directory as an argument
+    "$script_dir/$script" "$script_dir"
+done
